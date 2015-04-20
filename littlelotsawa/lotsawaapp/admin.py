@@ -31,39 +31,31 @@ class MyUserAdmin(UserAdmin):
         (None, {'fields': ('skill', 'interests',)}),
     )
 
-
 admin.site.register(MyUser, MyUserAdmin)
 
-
 class RegionAdmin(admin.ModelAdmin):
-    fields = ('name', 'shortdescription', 'superregion')
-    list_display = ('name', 'shortdescription', 'superregion')
-
+    fields = ('name','shortdescription', 'superregion')
+    list_display = ('name','shortdescription', 'superregion')
 
 class VocabularyValidationAdmin(admin.ModelAdmin):
-    fields = ('word', 'validated_by', 'validationborder')
+    fields = ('word','validated_by', 'validationborder')
     list_display = ('word', 'validationborder')
 
-
 class DialectAdmin(admin.ModelAdmin):
-    fields = ('name', 'region', 'superdialect')
+    fields = ('name','region', 'superdialect')
     list_display = ('name', 'superdialect')
-
 
 class SkillsAdmin(admin.ModelAdmin):
     fields = ('name')
     list_display = ('name')
 
-
 class InterestsAdmin(admin.ModelAdmin):
     fields = ('name',)
     list_display = ('name',)
 
-
 class VocabularyAdmin(admin.ModelAdmin):
-    fields = ('tibetan', 'english', 'german', 'pronounciation', 'validated', 'dialect', 'categories', 'notes')
-    list_display = ('tibetan', 'english', 'german', 'pronounciation', 'validated')
-
+    fields = ('tibetan','english', 'german', 'pronounciation', 'validated', 'dialect', 'categories', 'notes')
+    list_display = ('tibetan','english', 'german', 'pronounciation', 'validated')
 
 admin.site.register(Region, RegionAdmin)
 admin.site.register(VocabularyValidation, VocabularyValidationAdmin)

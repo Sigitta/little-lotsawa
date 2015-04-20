@@ -1,13 +1,11 @@
 from django.shortcuts import render
+from .forms import UserForm, SearchForm, ProfileForm
 from django.http import HttpResponseRedirect
+from .models import MyUser
 from django.contrib.auth.views import login
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-
-from .forms import UserForm, SearchForm, ProfileForm
-from .models import MyUser
-
 
 def myhome(request):
     if request.user.is_authenticated():
@@ -17,15 +15,12 @@ def myhome(request):
     else:
         return login(request, template_name="base.html")
 
-
 def about(request):
     return render(request, 'about.html')
-
 
 @login_required
 def baseloggedin(request):
     return render(request, 'baseloggedin.html')
-
 
 def communitydetails(request):
     return render(request, 'communitydetails.html')
@@ -33,7 +28,6 @@ def communitydetails(request):
 
 def dictionarydetails(request):
     return render(request, 'dictionarydetails.html')
-
 
 @login_required
 def edit(request):
@@ -48,22 +42,18 @@ def edit(request):
             user.email = profile.cleaned_data['email']
             user.searching = profile.cleaned_data['searching']
             user.save()
-            return redirect('/')
+            return redirect ('/')
     else:
-        profile = ProfileForm(
-            initial={'skype': user.skype, 'interests': user.interests, 'skill': user.skill, 'email': user.email,
-                     'searching': user.searching})
-    return render(request, 'edit.html', {'profile': profile})
+        profile = ProfileForm(initial={'skype': user.skype, 'interests':  user.interests, 'skill': user.skill, 'email': user.email, 'searching': user.searching})
+    return render(request, 'edit.html', {'profile':profile})
 
 
 def lessondetails(request):
     return render(request, 'lessondetails.html')
 
-
 def logoutsite(request):
     logout(request)
     return redirect('/')
-
 
 @login_required
 def profile(request):
@@ -71,8 +61,7 @@ def profile(request):
     if request.method == "GET":
         searchfield = SearchForm()
         trainees = user.show_trainingpartners()
-    return render(request, 'profile.html', {'searchfield': searchfield, 'trainees': trainees})
-
+    return render(request, 'profile.html', {'searchfield':searchfield, 'trainees':trainees})
 
 def signup(request):
     if request.method == "POST":
